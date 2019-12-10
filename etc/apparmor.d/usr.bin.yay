@@ -1,0 +1,74 @@
+# Last Modified: Mon Dec  9 15:43:07 2019
+#include <tunables/global>
+
+/usr/bin/yay {
+  #include <abstractions/base>
+  #include <abstractions/bash>
+  #include <abstractions/consoles>
+  #include <abstractions/nameservice>
+  #include <abstractions/ssl_keys>
+
+  /etc/ca-certificates/** r,
+  /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,
+  /usr/bin/git cx -> build,
+  /usr/bin/makepkg cx -> build,
+  /usr/bin/pacman-conf PUx,
+  /usr/bin/sudo Cx,
+  /usr/bin/test mrix,
+  /usr/bin/yay mr,
+  /usr/share/git-core/templates/** r,
+  /var/lib/pacman/local/ r,
+  /var/lib/pacman/local/** r,
+  /var/lib/pacman/sync/*.db r,
+  owner @{HOME}/.lesshst r,
+  owner @{HOME}/.cache/yay/ rw,
+  owner @{HOME}/.cache/yay/** rwlk,
+
+
+  profile /usr/bin/sudo {
+    #include <abstractions/authentication>
+    #include <abstractions/base>
+    #include <abstractions/consoles>
+    #include <abstractions/nameservice>
+    #include <abstractions/ubuntu-konsole>
+    #include <abstractions/wutmp>
+
+    capability audit_write,
+    capability setgid,
+    capability setuid,
+    capability sys_resource,
+
+    ptrace read peer=unconfined,
+
+    /etc/sudoers r,
+    /proc/*/stat r,
+    /usr/bin/pacman pux,
+    /usr/bin/sudo mr,
+    owner /etc/environment r,
+    owner /etc/security/limits.d/ r,
+    owner /etc/security/limits.d/10-gcr.conf r,
+    owner /etc/sudoers.d/ r,
+    owner /proc/*/fd/ r,
+    owner /proc/stat r,
+    owner /proc/sys/kernel/ngroups_max r,
+    owner /run/sudo/ts/* rwk,
+
+  }
+
+  profile build {
+    #include <abstractions/base>
+    #include <abstractions/nameservice>
+    #include <abstractions/openssl>
+    #include <abstractions/user-tmp>
+    #include <local/usr.bin.yay..build>
+
+    /dev/tty rw,
+    /etc/** r,
+    /usr/** r,
+    /usr/bin/* mrix,
+    /usr/lib/** mrix,
+    /var/lib/pacman/** r,
+    owner @{HOME}/.gitconfig r,
+    owner @{HOME}/.cache/yay/** rw,
+  }
+}

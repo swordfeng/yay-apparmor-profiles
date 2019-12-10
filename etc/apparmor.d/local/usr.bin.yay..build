@@ -1,0 +1,3 @@
+# Put extra rules for building process here
+# E.g.
+# @{HOME}/go/pkg/** rwkl,
