@@ -62,8 +62,9 @@
     #include <abstractions/wutmp>
     #include <local/usr.bin.yay..build>
 
-    /dev/tty rw,
-    /etc/** r,
+    /etc/makepkg.conf r,
+    /etc/pacman.conf r,
+    /etc/pacman.d/* r,
     /usr/** r,
     /usr/bin/* mrix,
     /usr/lib/** mrix,
