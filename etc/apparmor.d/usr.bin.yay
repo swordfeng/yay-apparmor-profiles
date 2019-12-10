@@ -3,15 +3,13 @@
 
 /usr/bin/yay {
   #include <abstractions/base>
-  #include <abstractions/bash>
   #include <abstractions/consoles>
   #include <abstractions/nameservice>
-  #include <abstractions/ssl_keys>
 
   /etc/ca-certificates/** r,
   /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,
-  /usr/bin/git cx -> build,
-  /usr/bin/makepkg cx -> build,
+  /usr/bin/* cx -> build,
+  /usr/bin/pacman PUx,
   /usr/bin/pacman-conf PUx,
   /usr/bin/sudo Cx,
   /usr/bin/test mrix,
@@ -30,7 +28,6 @@
     #include <abstractions/base>
     #include <abstractions/consoles>
     #include <abstractions/nameservice>
-    #include <abstractions/ubuntu-konsole>
     #include <abstractions/wutmp>
 
     capability audit_write,
@@ -57,9 +54,12 @@
 
   profile build {
     #include <abstractions/base>
+    #include <abstractions/bash>
+    #include <abstractions/consoles>
     #include <abstractions/nameservice>
     #include <abstractions/openssl>
     #include <abstractions/user-tmp>
+    #include <abstractions/wutmp>
     #include <local/usr.bin.yay..build>
 
     /dev/tty rw,
@@ -69,6 +69,6 @@
     /usr/lib/** mrix,
     /var/lib/pacman/** r,
     owner @{HOME}/.gitconfig r,
-    owner @{HOME}/.cache/yay/** rw,
+    owner @{HOME}/.cache/yay/** rwkl,
   }
 }
