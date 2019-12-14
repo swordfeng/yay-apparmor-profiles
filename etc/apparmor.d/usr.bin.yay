@@ -66,7 +66,7 @@
     /etc/pacman.conf r,
     /etc/pacman.d/* r,
     /usr/** r,
-    /usr/bin/* mrix,
+    /usr/bin/** mrix,
     /usr/lib/** mrix,
     /var/lib/pacman/** r,
     owner @{HOME}/.gitconfig r,
