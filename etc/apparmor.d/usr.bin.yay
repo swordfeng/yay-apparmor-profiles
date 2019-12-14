@@ -60,8 +60,8 @@
     #include <abstractions/openssl>
     #include <abstractions/user-tmp>
     #include <abstractions/wutmp>
-    #include <local/usr.bin.yay..build>
 
+    /etc/ca-certificates/extracted/* r,
     /etc/makepkg.conf r,
     /etc/pacman.conf r,
     /etc/pacman.d/* r,
@@ -71,5 +71,8 @@
     /var/lib/pacman/** r,
     owner @{HOME}/.gitconfig r,
     owner @{HOME}/.cache/yay/** rwkl,
+    owner @{HOME}/.cache/yay/** ix,
+
+    #include <local/usr.bin.yay-build>
   }
 }
