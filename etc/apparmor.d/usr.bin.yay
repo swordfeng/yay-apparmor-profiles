@@ -1,4 +1,4 @@
-# Last Modified: Mon Dec  9 15:43:07 2019
+# Last Modified: Sun Jan 12 18:58:05 2020
 #include <tunables/global>
 
 /usr/bin/yay {
@@ -7,10 +7,13 @@
   #include <abstractions/nameservice>
 
   /etc/ca-certificates/** r,
+  /etc/ssl/certs/edk2/ r,
+  /etc/ssl/certs/java/ r,
   /sys/kernel/mm/transparent_hugepage/hpage_pmd_size r,
   /usr/bin/* cx -> build,
   /usr/bin/pacman PUx,
   /usr/bin/pacman-conf PUx,
+  /usr/bin/gpg pux,
   /usr/bin/sudo Cx,
   /usr/bin/test mrix,
   /usr/bin/yay mr,
@@ -18,9 +21,9 @@
   /var/lib/pacman/local/ r,
   /var/lib/pacman/local/** r,
   /var/lib/pacman/sync/*.db r,
-  owner @{HOME}/.lesshst r,
   owner @{HOME}/.cache/yay/ rw,
   owner @{HOME}/.cache/yay/** rwlk,
+  owner @{HOME}/.lesshst r,
 
 
   profile /usr/bin/sudo {
@@ -64,14 +67,16 @@
     /etc/ca-certificates/extracted/* r,
     /etc/makepkg.conf r,
     /etc/pacman.conf r,
-    /etc/pacman.d/* r,
+    /etc/pacman.d/** r,
     /usr/** r,
     /usr/bin/** mrix,
     /usr/lib/** mrix,
     /var/lib/pacman/** r,
-    owner @{HOME}/.gitconfig r,
-    owner @{HOME}/.cache/yay/** rwkl,
+    owner /etc/pacman.d/** rw,
+    owner /home/*/.lesshst r,
     owner @{HOME}/.cache/yay/** ix,
+    owner @{HOME}/.cache/yay/** rwlk,
+    owner @{HOME}/.gitconfig r,
 
     #include <local/usr.bin.yay-build>
   }
